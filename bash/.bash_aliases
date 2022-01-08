@@ -7,6 +7,7 @@ alias c='clear'
 alias ls='ls -FC --color=auto'
 alias la='ls -A'
 alias ll='ls -l'
+alias more='less'
 
 alias ..='cd ..'
 alias cd..='cd ..'
