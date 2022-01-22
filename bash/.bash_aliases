@@ -4,10 +4,27 @@
 # For all Bash shells
 
 alias c='clear'
-alias ls='ls -FC --color=auto'
-alias la='ls -A'
-alias ll='ls -l'
 alias more='less'
+alias oops='!-1 | more'
+
+# Use 'exa' if it is available, instead of 'ls' (ref: https://the.exa.website)
+if command -v exa &> /dev/null
+then
+    alias ls='exa'
+    alias la='exa -a'
+    alias ll='exa -l'
+else
+    alias ls='ls -FC --color=auto'
+    alias la='ls -A'
+    alias ll='ls -l'
+fi
+
+# Use 'bat' if available, instead of 'cat' (ref: https://github.com/sharkdp/bat)
+if command -v batcat &> /dev/null
+then
+    alias bat='batcat'
+    alias cat='bat'
+fi
 
 alias ..='cd ..'
 alias cd..='cd ..'
@@ -16,6 +33,7 @@ alias cd..='cd ..'
 alias mkdir='mkdir -pv'
 
 alias h='history'
+alias top='htop'
 
 # Print $PATH with line breaks
 alias path='echo -e ${PATH//:/\\n}'
@@ -33,13 +51,13 @@ alias rm='rm -I --preserve-root'
 alias mv='mv -i'
 alias cp='cp -i'
 alias ln='ln -i'
- 
+
 # Prevent changing perms on /
 alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
 
-# Have wget resume/continue if there's a problem
+# Have wget resume/continue if there's a problem (go read the man page)
 alias wget='wget -c'
 
 # So we don't have to remember tar flags
@@ -54,10 +72,12 @@ fi
 
 ###############################################
 # For Raspberry Pi only
-# TODO: make this section conditional on processor (e.g. based on /proc/cpuinfo or lscpu)
 
-# Power Management
-# Alternative: sudo shutdown -r now
-alias shutdown='sudo poweroff'
-alias reboot='sudo reboot'
+# This section only used when on Raspberry Pi (easier than grep'ing /proc/cpuinfo "Model" line)
+if egrep -q "^Raspberry" /proc/device-tree/model; then
+  echo "Running on Raspberry Pi"
 
+  # Power Management
+  alias shutdown='sudo poweroff'    # Alternative: sudo shutdown -r now
+  alias reboot='sudo reboot'
+fi
