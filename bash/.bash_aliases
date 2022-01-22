@@ -75,7 +75,7 @@ fi
 
 # This section only used when on Raspberry Pi (easier than grep'ing /proc/cpuinfo "Model" line)
 if egrep -q "^Raspberry" /proc/device-tree/model; then
-  echo "Running on Raspberry Pi"
+  #echo "Running on Raspberry Pi"
 
   # Power Management
   alias shutdown='sudo poweroff'    # Alternative: sudo shutdown -r now
