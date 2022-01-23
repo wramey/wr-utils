@@ -10,7 +10,7 @@ alias oops='!-1 | more'
 # Use 'exa' if it is available, instead of 'ls' (ref: https://the.exa.website)
 if command -v exa &> /dev/null
 then
-    alias ls='exa'
+    alias ls='exa -F'
     alias la='exa -a'
     alias ll='exa -l'
 else
